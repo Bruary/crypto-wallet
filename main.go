@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/Bruary/crypto-wallet/db"
 	"github.com/Bruary/crypto-wallet/models"
+	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 
 	"encoding/json"
 	"io/ioutil"
@@ -11,12 +14,32 @@ import (
 	"net/http"
 )
 
-// main functionalities
-//	1) Know if you are in profit or loss.
-//  2) calculate the price of currency that when you will start gaining profit.
-//  3) Add the percentage of profit so you get notified.
+// TODO
+// Create structs for users, accounts, etc..
+// Add table to database
+// Create handlers
 
 func main() {
+
+	// Load .env file
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalln("Loading .env failed" + err.Error())
+	}
+
+	// Connect to db
+	db.ConnectToDB()
+
+	app := fiber.New()
+
+	v1 := app.Group("/v1")
+
+	user := v1.Group("/user")
+	user.Post("/create")
+	user.Post("/deactivate")
+
+	investment := v1.Group("/investment")
+	investment.Post("")
 
 	currencies, err := GetCurrencies()
 	if err != nil {
