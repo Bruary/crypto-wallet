@@ -1,7 +1,7 @@
 package models
 
 type BaseResponse struct {
-	Success string
+	Success bool
 	Msg     string
 	Error   Error
 }
