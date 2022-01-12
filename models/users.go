@@ -8,6 +8,8 @@ type User struct {
 	LastName  string
 	FullName  string
 	Age       string
-	DOB       time.Time
 	Email     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt time.Time
 }
