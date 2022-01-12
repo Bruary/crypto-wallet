@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/Bruary/crypto-wallet/db"
 	"github.com/Bruary/crypto-wallet/models"
 	"github.com/Bruary/crypto-wallet/service/users"
@@ -41,9 +39,9 @@ func main() {
 
 	user.Post("/create", func(c *fiber.Ctx) error {
 
-		c.Context().SetContentType("application/json")
+		c.Context().SetContentType("applications/json")
 
-		req := models.User{}
+		req := models.CreateUserRequest{}
 		if err := UnmarshalRequest(c, &req); err != nil {
 			return err
 		}
@@ -58,20 +56,21 @@ func main() {
 		return nil
 	})
 
-	user.Post("/deactivate")
+	// user.Post("/deactivate")
 
-	investment := v1.Group("/investment")
-	investment.Post("")
+	// investment := v1.Group("/investment")
+	// investment.Post("")
 
-	currencies, err := GetCurrencies()
-	if err != nil {
-		log.Fatalln(err)
-	}
+	// currencies, err := GetCurrencies()
+	// if err != nil {
+	// 	log.Fatalln(err)
+	// }
 
-	respJson, err := json.MarshalIndent(currencies, "", "    ")
+	//respJson, err := json.MarshalIndent(currencies, "", "    ")
 
-	fmt.Println(string(respJson))
+	//fmt.Println(string(respJson))
 
+	app.Listen(":3000")
 }
 
 func GetCurrencies() (interface{}, error) {
